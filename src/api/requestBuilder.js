@@ -1,5 +1,6 @@
 import axios from "axios";
 import { WEBAPI_ENDPOINT } from "../config";
+import { toast } from "react-toastify"
 
 export const getHeaders = () => {
   return {
@@ -59,6 +60,7 @@ export async function RequestBuilder(
       };
     }
     if (response.status === 401) {
+      toast.error("Unauthorized");
       return {
         success: false,
         message: "unauthorized",
@@ -66,12 +68,14 @@ export async function RequestBuilder(
       };
     }
     if (response.status === 404) {
+      toast.error('Not Found')
       return response.json().then((data) => ({
         success: response.ok || false,
         message: data.error_description || "Please try after sometime",
         data: "",
       }));
     }
+    toast.error('Something went wrong, Please try again later.')
     return {
       success: false,
       message: "Something went wrong, Please try again later.",
@@ -79,6 +83,7 @@ export async function RequestBuilder(
     };
   } catch (error) {
     console.log("RequestBuilder error", error);
+    toast.error('Something went wrong, Please try again later.')
     return {
       success: false,
       message: "Something went wrong, Please try again later.",
