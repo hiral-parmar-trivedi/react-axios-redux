@@ -1,5 +1,6 @@
 import { getProductDetail, getProductList } from "../../api/productApi";
 import { setLoader } from "./actions";
+import { toast } from "react-toastify";
 
 export const SAVE_PRODUCT_DATA = "SAVE_PRODUCT_DATA";
 export const SAVE_PRODUCT_DETAIL = "SAVE_PRODUCT_DETAIL";
@@ -34,6 +35,7 @@ export const fetchProductList = () => {
       console.log("fetchProducts error", error);
       dispatch(saveProductData([]));
       dispatch(setLoader(false));
+      toast.error(error.message);
     }
   };
 };
@@ -42,8 +44,11 @@ export const fetchProductDetail = (productId) => {
   return async (dispatch) => {
     try {
       const productDetailResponse = await getProductDetail(productId);
+      console.log("productDetailResponse", productDetailResponse);
       if (productDetailResponse.success) {
         dispatch(saveProductDetail(productDetailResponse.data));
+      } else {
+        dispatch(saveProductDetail(null));
       }
     } catch (error) {
       console.log("fetchProductDetail error", error);

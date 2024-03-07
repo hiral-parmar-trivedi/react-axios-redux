@@ -11,7 +11,7 @@ const ProductsList = () => {
 
   useEffect(() => {
     dispatch(fetchProductList());
-  }, [dispatch]);
+  }, []);
 
   const handleAddToCart = useCallback((product) => {
     dispatch(addToCart(product));
@@ -22,6 +22,7 @@ const ProductsList = () => {
       {loader ? (
         <h2>Loading products...</h2>
       ) : (
+        products &&
         products.length > 0 &&
         products.map((product) => {
           return (

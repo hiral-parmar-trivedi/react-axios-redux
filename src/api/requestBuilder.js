@@ -6,6 +6,7 @@ export const getHeaders = () => {
   return {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
+    // "authorization": "bearer+ ....."
   };
 };
 
@@ -37,6 +38,8 @@ export async function RequestBuilder(
     const parameters = body ? JSON.stringify(body) : body;
     let updatedMethod = method.toString().toLowerCase();
     //axios.get()
+    //axios.post()
+    //axios.put()
     const response = await axiosInstance[updatedMethod](endpoint, parameters, {
       headers,
     });
@@ -60,7 +63,7 @@ export async function RequestBuilder(
       };
     }
     if (response.status === 401) {
-      toast.error("Unauthorized");
+      // toast.error("Unauthorized");
       return {
         success: false,
         message: "unauthorized",
@@ -68,14 +71,14 @@ export async function RequestBuilder(
       };
     }
     if (response.status === 404) {
-      toast.error('Not Found')
+      // toast.error('Not Found')
       return response.json().then((data) => ({
         success: response.ok || false,
         message: data.error_description || "Please try after sometime",
         data: "",
       }));
     }
-    toast.error('Something went wrong, Please try again later.')
+    // toast.error('Something went wrong, Please try again later.')
     return {
       success: false,
       message: "Something went wrong, Please try again later.",
@@ -83,7 +86,7 @@ export async function RequestBuilder(
     };
   } catch (error) {
     console.log("RequestBuilder error", error);
-    toast.error('Something went wrong, Please try again later.')
+    // toast.error('Something went wrong, Please try again later.')
     return {
       success: false,
       message: "Something went wrong, Please try again later.",

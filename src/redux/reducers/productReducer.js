@@ -11,10 +11,10 @@ const initialState = {
 export const productReducer = (state = initialState, action) => {
   switch (action.type) {
     case SAVE_PRODUCT_DATA:
-      return { products: action.payload };
+      return { ...state, products: action.payload };
 
     case SAVE_PRODUCT_DETAIL:
-      return { productDetail: action.payload };
+      return { ...state, productDetail: action.payload };
 
     default:
       return state;

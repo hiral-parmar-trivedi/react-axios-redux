@@ -5,23 +5,25 @@ const Navbar = () => {
   const cartItems = useSelector((state) => state.cartItems);
 
   return (
-    <header>
-      <nav>
-        <h1>
-          <NavLink to="/products">Product Demo</NavLink>
-        </h1>
-        <div className="nav-links">
-          <ul>
-            <li>
-              <NavLink to="/products">Products</NavLink>
-            </li>
-            <li>
-              <NavLink to="/cart">Cart ({cartItems.length})</NavLink>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </header>
+    <>
+      <header>
+        <nav>
+          <h1>
+            <NavLink to="/products">React Axios & Redux Demo</NavLink>
+          </h1>
+          <div className="nav-links">
+            <ul>
+              <li>
+                <NavLink to="/products">Products</NavLink>
+              </li>
+              <li>
+                <NavLink to="/cart">Cart ({cartItems.length})</NavLink>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+    </>
   );
 };
 
