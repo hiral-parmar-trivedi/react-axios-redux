@@ -12,7 +12,7 @@ const ProductCard = ({ product, addToCart, removeFromCart, isAddBtn }) => {
 		<div className="product-item">
 			<img
 				className="product-image"
-				src={product.image}
+				src={product.thumbnail}
 				alt={product.title}
 			/>
 			<h3>{product.title}</h3>

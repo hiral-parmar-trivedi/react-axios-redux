@@ -5,7 +5,8 @@ import { addToCart } from "../../redux/actions/actions";
 import { fetchProductList } from "../../redux/actions/productActions";
 
 const ProductsList = () => {
-  const { loading, products, error } = useSelector((state) => state.products);
+  const { products } = useSelector((state) => state.products);
+  const { loader } = useSelector((state) => state.app);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -18,10 +19,8 @@ const ProductsList = () => {
 
   return (
     <div className="products-container">
-      {loading ? (
+      {loader ? (
         <h2>Loading products...</h2>
-      ) : error != "" ? (
-        <h2>{error}</h2>
       ) : (
         products.length > 0 &&
         products.map((product) => {

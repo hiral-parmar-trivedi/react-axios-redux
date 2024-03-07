@@ -1,4 +1,5 @@
 import { getProductDetail, getProductList } from "../../api/productApi";
+import { setLoader } from "./actions";
 
 export const SAVE_PRODUCT_DATA = "SAVE_PRODUCT_DATA";
 export const SAVE_PRODUCT_DETAIL = "SAVE_PRODUCT_DETAIL";
@@ -20,16 +21,19 @@ export const saveProductDetail = (product) => {
 export const fetchProductList = () => {
   return async (dispatch) => {
     try {
+      dispatch(setLoader(true));
       const productResponse = await getProductList();
-	  console.log("productResponse", productResponse)
+      console.log("productResponse", productResponse);
       if (productResponse.success) {
         dispatch(saveProductData(productResponse.data.products));
       } else {
         dispatch(saveProductData([]));
       }
+      dispatch(setLoader(false));
     } catch (error) {
       console.log("fetchProducts error", error);
       dispatch(saveProductData([]));
+      dispatch(setLoader(false));
     }
   };
 };
